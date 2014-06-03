@@ -4,7 +4,6 @@ using MediaBrowser.Controller.Drawing;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Channels;
-using MediaBrowser.Model.Configuration;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Logging;
 using MediaBrowser.Model.Serialization;
@@ -22,14 +21,12 @@ namespace MediaBrowser.Plugins.TWiT
         private readonly IHttpClient _httpClient;
         private readonly ILogger _logger;
         private readonly IXmlSerializer _xmlSerializer;
-        private readonly ServerConfiguration _serverConfig;
 
-        public TwitChannel(IHttpClient httpClient, IXmlSerializer xmlSerializer, ILogManager logManager, IServerManager serverManager, ServerConfiguration serverConfig)
+        public TwitChannel(IHttpClient httpClient, IXmlSerializer xmlSerializer, ILogManager logManager, IServerManager serverManager)
         {
             _httpClient = httpClient;
             _logger = logManager.GetLogger(GetType().Name);
             _xmlSerializer = xmlSerializer;
-            _serverConfig = serverConfig;
         }
 
         public string DataVersion
@@ -168,7 +165,7 @@ namespace MediaBrowser.Plugins.TWiT
                     twitChannels.Add(new ChannelItemInfo
                     {
                         Type = ChannelItemType.Folder,
-                        ImageUrl = "http://feeds.twit.tv/coverart/" + altArtValues[currentChannel.Key] + "1400.jpg",
+                        ImageUrl = "http://feeds.twit.tv/coverart/" + altArtValues[currentChannel.Key] + "600.jpg",
                         Name = currentChannel.Value,
                         Id = altArtValues[currentChannel.Key],
                     });
@@ -200,24 +197,7 @@ namespace MediaBrowser.Plugins.TWiT
 
             string streamingWidth = Channel.ConfigurationManager.Configuration.ChannelOptions.PreferredStreamingWidth.ToString();
 
-            _logger.Debug("**** CHANNEL QUALITY SETTING: " + streamingWidth + " ****");
-
-            string streamQuality = "_video_hd.xml";
-
-            if (streamingWidth == "1920")
-            {
-                streamQuality = "_video_hd.xml";
-            }
-            else if (streamingWidth == "1280")
-            {
-                streamQuality = "_video_large.xml";
-            }
-            else if (streamingWidth == "720")
-            {
-                streamQuality = "_video_small.xml";
-            }
-
-            string baseurl = "http://feeds.twit.tv/" + query.FolderId + streamQuality;
+            string baseurl = "http://feeds.twit.tv/" + query.FolderId + "_video_hd.xml";
 
             var videos = await downloader.GetStreamList(baseurl, offset, cancellationToken)
                 .ConfigureAwait(false);
@@ -232,6 +212,8 @@ namespace MediaBrowser.Plugins.TWiT
                 mediaInfo.Add( new ChannelMediaInfo {
                     IsRemote = true,
                     Path = i.link,
+                    Width = 1280,
+                    Height = 720,
                 });
 
                 string[] runtimeArray = i.duration.Split(':');
@@ -300,15 +282,33 @@ namespace MediaBrowser.Plugins.TWiT
 
         public async Task<IEnumerable<ChannelMediaInfo>> GetChannelItemMediaInfo(string id, CancellationToken cancellationToken)
         {
-            string playURL = id;
+            string[] filenameparts = filenameparts = id.Split('_');
+            string baseurl = filenameparts[0];
 
-            _logger.Debug("**** TWiT Stream: " + playURL + " ****");
+            _logger.Debug("**** TWiT PLAYBACK EPISODEID: " + baseurl + " ****");
+            _logger.Debug("**** TWiT PLAYBACK HD Stream: " + baseurl + "_h264m_1280x720_1872.mp4" + " ****");
+            _logger.Debug("**** TWiT PLAYBACK HQ Stream: " + baseurl + "_h264m_864x480_500.mp4" + " ****");
+            _logger.Debug("**** TWiT PLAYBACK LQ Stream: " + baseurl + "_h264b_640x368_256.mp4" + " ****");
 
             return new List<ChannelMediaInfo>
                 {
                     new ChannelMediaInfo
                     {
-                        Path = playURL
+                        Path = baseurl + "_h264m_1280x720_1872.mp4",
+                        Width = 1280,
+                        Height = 720,
+                    },
+                    new ChannelMediaInfo
+                    {
+                        Path = baseurl + "_h264m_864x480_500.mp4",
+                        Width = 864,
+                        Height = 480,
+                    },
+                    new ChannelMediaInfo
+                    {
+                        Path = baseurl + "_h264b_640x368_256.mp4",
+                        Width = 640,
+                        Height = 368,
                     }
                 };
         }
