@@ -1,1249 +1,348 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace MediaBrowser.Plugins.TWiT
 {
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    [XmlType(AnonymousType = true)]
+    [XmlRoot(Namespace = "", IsNullable = false)]
     public partial class rss
     {
-
-        private rssChannel channelField;
-
-        private decimal versionField;
+        /// <remarks/>
+        public rssChannel channel { get; set; }
 
         /// <remarks/>
-        public rssChannel channel
-        {
-            get
-            {
-                return this.channelField;
-            }
-            set
-            {
-                this.channelField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public decimal version
-        {
-            get
-            {
-                return this.versionField;
-            }
-            set
-            {
-                this.versionField = value;
-            }
-        }
+        [XmlAttribute()]
+        public decimal version { get; set; }
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [XmlType(AnonymousType = true)]
     public partial class rssChannel
     {
-
-        private string titleField;
-
-        private string linkField;
-
-        private string generatorField;
-
-        private string docsField;
-
-        private string languageField;
-
-        private string copyrightField;
-
-        private string licenseField;
-
-        private string managingEditorField;
-
-        private string webMasterField;
-
-        private ushort ttlField;
-
-        private string updatePeriodField;
-
-        private byte updateFrequencyField;
-
-        private string lastBuildDateField;
-
-        private string pubDateField;
-
-        private string categoryField;
-
-        private rssChannelImage imageField;
-
-        private link link1Field;
-
-        private string authorField;
-
-        private string subtitleField;
-
-        private string summaryField;
-
-        private string descriptionField;
-
-        private string keywordsField;
-
-        private string explicitField;
-
-        private owner ownerField;
-
-        private string blockField;
-
-        private image image1Field;
-
-        private category[] category1Field;
-
-        private rssChannelItem[] itemField;
+        /// <remarks/>
+        public string title { get; set; }
 
         /// <remarks/>
-        public string title
-        {
-            get
-            {
-                return this.titleField;
-            }
-            set
-            {
-                this.titleField = value;
-            }
-        }
+        public string link { get; set; }
 
         /// <remarks/>
-        public string link
-        {
-            get
-            {
-                return this.linkField;
-            }
-            set
-            {
-                this.linkField = value;
-            }
-        }
+        public string generator { get; set; }
 
         /// <remarks/>
-        public string generator
-        {
-            get
-            {
-                return this.generatorField;
-            }
-            set
-            {
-                this.generatorField = value;
-            }
-        }
+        public string docs { get; set; }
 
         /// <remarks/>
-        public string docs
-        {
-            get
-            {
-                return this.docsField;
-            }
-            set
-            {
-                this.docsField = value;
-            }
-        }
+        public string language { get; set; }
 
         /// <remarks/>
-        public string language
-        {
-            get
-            {
-                return this.languageField;
-            }
-            set
-            {
-                this.languageField = value;
-            }
-        }
+        public string copyright { get; set; }
 
         /// <remarks/>
-        public string copyright
-        {
-            get
-            {
-                return this.copyrightField;
-            }
-            set
-            {
-                this.copyrightField = value;
-            }
-        }
+        [XmlElement(Namespace = "http://backend.userland.com/creativeCommonsRssModule")]
+        public string license { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://backend.userland.com/creativeCommonsRssModule")]
-        public string license
-        {
-            get
-            {
-                return this.licenseField;
-            }
-            set
-            {
-                this.licenseField = value;
-            }
-        }
+        public string managingEditor { get; set; }
 
         /// <remarks/>
-        public string managingEditor
-        {
-            get
-            {
-                return this.managingEditorField;
-            }
-            set
-            {
-                this.managingEditorField = value;
-            }
-        }
+        public string webMaster { get; set; }
 
         /// <remarks/>
-        public string webMaster
-        {
-            get
-            {
-                return this.webMasterField;
-            }
-            set
-            {
-                this.webMasterField = value;
-            }
-        }
+        public ushort ttl { get; set; }
 
         /// <remarks/>
-        public ushort ttl
-        {
-            get
-            {
-                return this.ttlField;
-            }
-            set
-            {
-                this.ttlField = value;
-            }
-        }
+        [XmlElement(Namespace = "http://purl.org/rss/1.0/modules/syndication/")]
+        public string updatePeriod { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://purl.org/rss/1.0/modules/syndication/")]
-        public string updatePeriod
-        {
-            get
-            {
-                return this.updatePeriodField;
-            }
-            set
-            {
-                this.updatePeriodField = value;
-            }
-        }
+        [XmlElement(Namespace = "http://purl.org/rss/1.0/modules/syndication/")]
+        public byte updateFrequency { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://purl.org/rss/1.0/modules/syndication/")]
-        public byte updateFrequency
-        {
-            get
-            {
-                return this.updateFrequencyField;
-            }
-            set
-            {
-                this.updateFrequencyField = value;
-            }
-        }
+        public string lastBuildDate { get; set; }
 
         /// <remarks/>
-        public string lastBuildDate
-        {
-            get
-            {
-                return this.lastBuildDateField;
-            }
-            set
-            {
-                this.lastBuildDateField = value;
-            }
-        }
+        public string pubDate { get; set; }
 
         /// <remarks/>
-        public string pubDate
-        {
-            get
-            {
-                return this.pubDateField;
-            }
-            set
-            {
-                this.pubDateField = value;
-            }
-        }
+        public string category { get; set; }
 
         /// <remarks/>
-        public string category
-        {
-            get
-            {
-                return this.categoryField;
-            }
-            set
-            {
-                this.categoryField = value;
-            }
-        }
+        public rssChannelImage image { get; set; }
 
         /// <remarks/>
-        public rssChannelImage image
-        {
-            get
-            {
-                return this.imageField;
-            }
-            set
-            {
-                this.imageField = value;
-            }
-        }
+        [XmlElement("link", Namespace = "http://www.w3.org/2005/Atom")]
+        public link link1 { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("link", Namespace = "http://www.w3.org/2005/Atom")]
-        public link link1
-        {
-            get
-            {
-                return this.link1Field;
-            }
-            set
-            {
-                this.link1Field = value;
-            }
-        }
+        [XmlElement(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+        public string author { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-        public string author
-        {
-            get
-            {
-                return this.authorField;
-            }
-            set
-            {
-                this.authorField = value;
-            }
-        }
+        [XmlElement(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+        public string subtitle { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-        public string subtitle
-        {
-            get
-            {
-                return this.subtitleField;
-            }
-            set
-            {
-                this.subtitleField = value;
-            }
-        }
+        [XmlElement(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+        public string summary { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-        public string summary
-        {
-            get
-            {
-                return this.summaryField;
-            }
-            set
-            {
-                this.summaryField = value;
-            }
-        }
+        public string description { get; set; }
 
         /// <remarks/>
-        public string description
-        {
-            get
-            {
-                return this.descriptionField;
-            }
-            set
-            {
-                this.descriptionField = value;
-            }
-        }
+        [XmlElement(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+        public string keywords { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-        public string keywords
-        {
-            get
-            {
-                return this.keywordsField;
-            }
-            set
-            {
-                this.keywordsField = value;
-            }
-        }
+        [XmlElement(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+        public string @explicit { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-        public string @explicit
-        {
-            get
-            {
-                return this.explicitField;
-            }
-            set
-            {
-                this.explicitField = value;
-            }
-        }
+        [XmlElement(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+        public owner owner { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-        public owner owner
-        {
-            get
-            {
-                return this.ownerField;
-            }
-            set
-            {
-                this.ownerField = value;
-            }
-        }
+        [XmlElement(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+        public string block { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-        public string block
-        {
-            get
-            {
-                return this.blockField;
-            }
-            set
-            {
-                this.blockField = value;
-            }
-        }
+        [XmlElement("image", Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+        public image image1 { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("image", Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-        public image image1
-        {
-            get
-            {
-                return this.image1Field;
-            }
-            set
-            {
-                this.image1Field = value;
-            }
-        }
+        [XmlElement("category", Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+        public category[] category1 { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("category", Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-        public category[] category1
-        {
-            get
-            {
-                return this.category1Field;
-            }
-            set
-            {
-                this.category1Field = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("item")]
-        public rssChannelItem[] item
-        {
-            get
-            {
-                return this.itemField;
-            }
-            set
-            {
-                this.itemField = value;
-            }
-        }
+        [XmlElement("item")]
+        public rssChannelItem[] item { get; set; }
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [XmlType(AnonymousType = true)]
     public partial class rssChannelImage
     {
-
-        private string titleField;
-
-        private string urlField;
-
-        private string linkField;
-
-        private byte widthField;
-
-        private byte heightField;
+        /// <remarks/>
+        public string title { get; set; }
 
         /// <remarks/>
-        public string title
-        {
-            get
-            {
-                return this.titleField;
-            }
-            set
-            {
-                this.titleField = value;
-            }
-        }
+        public string url { get; set; }
 
         /// <remarks/>
-        public string url
-        {
-            get
-            {
-                return this.urlField;
-            }
-            set
-            {
-                this.urlField = value;
-            }
-        }
+        public string link { get; set; }
 
         /// <remarks/>
-        public string link
-        {
-            get
-            {
-                return this.linkField;
-            }
-            set
-            {
-                this.linkField = value;
-            }
-        }
+        public byte width { get; set; }
 
         /// <remarks/>
-        public byte width
-        {
-            get
-            {
-                return this.widthField;
-            }
-            set
-            {
-                this.widthField = value;
-            }
-        }
-
-        /// <remarks/>
-        public byte height
-        {
-            get
-            {
-                return this.heightField;
-            }
-            set
-            {
-                this.heightField = value;
-            }
-        }
+        public byte height { get; set; }
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.w3.org/2005/Atom")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.w3.org/2005/Atom", IsNullable = false)]
+    [XmlType(AnonymousType = true, Namespace = "http://www.w3.org/2005/Atom")]
+    [XmlRoot(Namespace = "http://www.w3.org/2005/Atom", IsNullable = false)]
     public partial class link
     {
-
-        private string hrefField;
-
-        private string typeField;
-
-        private string relField;
+        /// <remarks/>
+        [XmlAttribute()]
+        public string href { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string href
-        {
-            get
-            {
-                return this.hrefField;
-            }
-            set
-            {
-                this.hrefField = value;
-            }
-        }
+        [XmlAttribute()]
+        public string type { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string type
-        {
-            get
-            {
-                return this.typeField;
-            }
-            set
-            {
-                this.typeField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string rel
-        {
-            get
-            {
-                return this.relField;
-            }
-            set
-            {
-                this.relField = value;
-            }
-        }
+        [XmlAttribute()]
+        public string rel { get; set; }
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd", IsNullable = false)]
+    [XmlType(AnonymousType = true, Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+    [XmlRoot(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd", IsNullable = false)]
     public partial class owner
     {
-
-        private string nameField;
-
-        private string emailField;
+        /// <remarks/>
+        public string name { get; set; }
 
         /// <remarks/>
-        public string name
-        {
-            get
-            {
-                return this.nameField;
-            }
-            set
-            {
-                this.nameField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string email
-        {
-            get
-            {
-                return this.emailField;
-            }
-            set
-            {
-                this.emailField = value;
-            }
-        }
+        public string email { get; set; }
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd", IsNullable = false)]
+    [XmlType(AnonymousType = true, Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+    [XmlRoot(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd", IsNullable = false)]
     public partial class image
     {
-
-        private string hrefField;
-
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string href
-        {
-            get
-            {
-                return this.hrefField;
-            }
-            set
-            {
-                this.hrefField = value;
-            }
-        }
+        [XmlAttribute()]
+        public string href { get; set; }
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd", IsNullable = false)]
+    [XmlType(AnonymousType = true, Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+    [XmlRoot(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd", IsNullable = false)]
     public partial class category
     {
-
-        private categoryCategory category1Field;
-
-        private string textField;
+        /// <remarks/>
+        [XmlElement("category")]
+        public categoryCategory category1 { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("category")]
-        public categoryCategory category1
-        {
-            get
-            {
-                return this.category1Field;
-            }
-            set
-            {
-                this.category1Field = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string text
-        {
-            get
-            {
-                return this.textField;
-            }
-            set
-            {
-                this.textField = value;
-            }
-        }
+        [XmlAttribute()]
+        public string text { get; set; }
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+    [XmlType(AnonymousType = true, Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
     public partial class categoryCategory
     {
-
-        private string textField;
-
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string text
-        {
-            get
-            {
-                return this.textField;
-            }
-            set
-            {
-                this.textField = value;
-            }
-        }
+        [XmlAttribute()]
+        public string text { get; set; }
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [XmlType(AnonymousType = true)]
     public partial class rssChannelItem
     {
-
-        private string titleField;
-
-        private string pubDateField;
-
-        private string commentsField;
-
-        private string authorField;
-
-        private string author1Field;
-
-        private string categoryField;
-
-        private string descriptionField;
-
-        private rssChannelItemGuid guidField;
-
-        private string subtitleField;
-
-        private string summaryField;
-
-        private string explicitField;
-
-        private string durationField;
-
-        private string linkField;
-
-        private rssChannelItemEnclosure enclosureField;
-
-        private content contentField;
+        /// <remarks/>
+        public string title { get; set; }
 
         /// <remarks/>
-        public string title
-        {
-            get
-            {
-                return this.titleField;
-            }
-            set
-            {
-                this.titleField = value;
-            }
-        }
+        public string pubDate { get; set; }
 
         /// <remarks/>
-        public string pubDate
-        {
-            get
-            {
-                return this.pubDateField;
-            }
-            set
-            {
-                this.pubDateField = value;
-            }
-        }
+        public string comments { get; set; }
 
         /// <remarks/>
-        public string comments
-        {
-            get
-            {
-                return this.commentsField;
-            }
-            set
-            {
-                this.commentsField = value;
-            }
-        }
+        [XmlElement(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+        public string author { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-        public string author
-        {
-            get
-            {
-                return this.authorField;
-            }
-            set
-            {
-                this.authorField = value;
-            }
-        }
+        [XmlElement("author")]
+        public string author1 { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("author")]
-        public string author1
-        {
-            get
-            {
-                return this.author1Field;
-            }
-            set
-            {
-                this.author1Field = value;
-            }
-        }
+        public string category { get; set; }
 
         /// <remarks/>
-        public string category
-        {
-            get
-            {
-                return this.categoryField;
-            }
-            set
-            {
-                this.categoryField = value;
-            }
-        }
+        public string description { get; set; }
 
         /// <remarks/>
-        public string description
-        {
-            get
-            {
-                return this.descriptionField;
-            }
-            set
-            {
-                this.descriptionField = value;
-            }
-        }
+        public rssChannelItemGuid guid { get; set; }
 
         /// <remarks/>
-        public rssChannelItemGuid guid
-        {
-            get
-            {
-                return this.guidField;
-            }
-            set
-            {
-                this.guidField = value;
-            }
-        }
+        [XmlElement(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+        public string subtitle { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-        public string subtitle
-        {
-            get
-            {
-                return this.subtitleField;
-            }
-            set
-            {
-                this.subtitleField = value;
-            }
-        }
+        [XmlElement(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+        public string summary { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-        public string summary
-        {
-            get
-            {
-                return this.summaryField;
-            }
-            set
-            {
-                this.summaryField = value;
-            }
-        }
+        [XmlElement(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+        public string @explicit { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-        public string @explicit
-        {
-            get
-            {
-                return this.explicitField;
-            }
-            set
-            {
-                this.explicitField = value;
-            }
-        }
+        [XmlElement(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
+        public string duration { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd")]
-        public string duration
-        {
-            get
-            {
-                return this.durationField;
-            }
-            set
-            {
-                this.durationField = value;
-            }
-        }
+        public string link { get; set; }
 
         /// <remarks/>
-        public string link
-        {
-            get
-            {
-                return this.linkField;
-            }
-            set
-            {
-                this.linkField = value;
-            }
-        }
+        public rssChannelItemEnclosure enclosure { get; set; }
 
         /// <remarks/>
-        public rssChannelItemEnclosure enclosure
-        {
-            get
-            {
-                return this.enclosureField;
-            }
-            set
-            {
-                this.enclosureField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://search.yahoo.com/mrss/")]
-        public content content
-        {
-            get
-            {
-                return this.contentField;
-            }
-            set
-            {
-                this.contentField = value;
-            }
-        }
+        [XmlElement(Namespace = "http://search.yahoo.com/mrss/")]
+        public content content { get; set; }
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [XmlType(AnonymousType = true)]
     public partial class rssChannelItemGuid
     {
-
-        private bool isPermaLinkField;
-
-        private string valueField;
+        /// <remarks/>
+        [XmlAttribute()]
+        public bool isPermaLink { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool isPermaLink
-        {
-            get
-            {
-                return this.isPermaLinkField;
-            }
-            set
-            {
-                this.isPermaLinkField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
+        [XmlText()]
+        public string Value { get; set; }
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [XmlType(AnonymousType = true)]
     public partial class rssChannelItemEnclosure
     {
-
-        private string urlField;
-
-        private uint lengthField;
-
-        private string typeField;
+        /// <remarks/>
+        [XmlAttribute()]
+        public string url { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string url
-        {
-            get
-            {
-                return this.urlField;
-            }
-            set
-            {
-                this.urlField = value;
-            }
-        }
+        [XmlAttribute()]
+        public uint length { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public uint length
-        {
-            get
-            {
-                return this.lengthField;
-            }
-            set
-            {
-                this.lengthField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string type
-        {
-            get
-            {
-                return this.typeField;
-            }
-            set
-            {
-                this.typeField = value;
-            }
-        }
+        [XmlAttribute()]
+        public string type { get; set; }
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://search.yahoo.com/mrss/")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://search.yahoo.com/mrss/", IsNullable = false)]
+    [XmlType(AnonymousType = true, Namespace = "http://search.yahoo.com/mrss/")]
+    [XmlRoot(Namespace = "http://search.yahoo.com/mrss/", IsNullable = false)]
     public partial class content
     {
-
-        private contentCredit[] creditField;
-
-        private contentRating[] ratingField;
-
-        private string urlField;
-
-        private uint fileSizeField;
-
-        private string typeField;
-
-        private string mediumField;
+        /// <remarks/>
+        [XmlElement("credit")]
+        public contentCredit[] credit { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("credit")]
-        public contentCredit[] credit
-        {
-            get
-            {
-                return this.creditField;
-            }
-            set
-            {
-                this.creditField = value;
-            }
-        }
+        [XmlElement("rating")]
+        public contentRating[] rating { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("rating")]
-        public contentRating[] rating
-        {
-            get
-            {
-                return this.ratingField;
-            }
-            set
-            {
-                this.ratingField = value;
-            }
-        }
+        [XmlAttribute()]
+        public string url { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string url
-        {
-            get
-            {
-                return this.urlField;
-            }
-            set
-            {
-                this.urlField = value;
-            }
-        }
+        [XmlAttribute()]
+        public uint fileSize { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public uint fileSize
-        {
-            get
-            {
-                return this.fileSizeField;
-            }
-            set
-            {
-                this.fileSizeField = value;
-            }
-        }
+        [XmlAttribute()]
+        public string type { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string type
-        {
-            get
-            {
-                return this.typeField;
-            }
-            set
-            {
-                this.typeField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string medium
-        {
-            get
-            {
-                return this.mediumField;
-            }
-            set
-            {
-                this.mediumField = value;
-            }
-        }
+        [XmlAttribute()]
+        public string medium { get; set; }
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://search.yahoo.com/mrss/")]
+    [XmlType(AnonymousType = true, Namespace = "http://search.yahoo.com/mrss/")]
     public partial class contentCredit
     {
-
-        private string roleField;
-
-        private string valueField;
+        /// <remarks/>
+        [XmlAttribute()]
+        public string role { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string role
-        {
-            get
-            {
-                return this.roleField;
-            }
-            set
-            {
-                this.roleField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
+        [XmlText()]
+        public string Value { get; set; }
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://search.yahoo.com/mrss/")]
+    [XmlType(AnonymousType = true, Namespace = "http://search.yahoo.com/mrss/")]
     public partial class contentRating
     {
-
-        private string schemeField;
-
-        private string valueField;
+        /// <remarks/>
+        [XmlAttribute()]
+        public string scheme { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string scheme
-        {
-            get
-            {
-                return this.schemeField;
-            }
-            set
-            {
-                this.schemeField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
+        [XmlText()]
+        public string Value { get; set; }
     }
 
 }

@@ -10,7 +10,6 @@ using MediaBrowser.Model.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -108,38 +107,40 @@ namespace MediaBrowser.Plugins.TWiT
 
         private async Task<ChannelItemResult> GetChannelsInternal(InternalChannelItemQuery query, CancellationToken cancellationToken)
         {
-            List<ChannelItemInfo> twitChannels = new List<ChannelItemInfo>();
+            var twitChannels = new List<ChannelItemInfo>();
 
-            List<KeyValuePair<string,string>> masterChannelList = new List<KeyValuePair<string,string>>();
-            masterChannelList.Add(new KeyValuePair<string, string>("aaa", "All About Android"));
-            masterChannelList.Add(new KeyValuePair<string, string>("arena", "Android App Arena"));
-            masterChannelList.Add(new KeyValuePair<string, string>("byb", "Before You Buy"));
-            masterChannelList.Add(new KeyValuePair<string, string>("code", "Coding 101"));
-            masterChannelList.Add(new KeyValuePair<string, string>("floss", "FLOSS Weekly"));
-            masterChannelList.Add(new KeyValuePair<string, string>("dgw", "The Giz Wiz"));
-            masterChannelList.Add(new KeyValuePair<string, string>("hn", "Ham Nation"));
-            masterChannelList.Add(new KeyValuePair<string, string>("htg", "Home Theater Geeks"));
-            masterChannelList.Add(new KeyValuePair<string, string>("ifive", "iFive For The iPhone"));
-            masterChannelList.Add(new KeyValuePair<string, string>("ipad", "iPad Today"));
-            masterChannelList.Add(new KeyValuePair<string, string>("kh", "Know How"));
-            masterChannelList.Add(new KeyValuePair<string, string>("mbw", "MacBreak Weekly"));
-            masterChannelList.Add(new KeyValuePair<string, string>("mm", "Marketing Mavericks"));
-            masterChannelList.Add(new KeyValuePair<string, string>("omgcraft", "OMGcraft"));
-            masterChannelList.Add(new KeyValuePair<string, string>("sn", "Security Now"));
-            masterChannelList.Add(new KeyValuePair<string, string>("natn", "The Social Hour"));
-            masterChannelList.Add(new KeyValuePair<string, string>("ttg", "The Tech Guy"));
-            masterChannelList.Add(new KeyValuePair<string, string>("tnt", "Tech News Today"));
-            masterChannelList.Add(new KeyValuePair<string, string>("tn2n", "Tech News 2Night"));
-            masterChannelList.Add(new KeyValuePair<string, string>("twich", "This Week in Computer Hardware"));
-            masterChannelList.Add(new KeyValuePair<string, string>("twiet", "This Week in Enterprise Tech"));
-            masterChannelList.Add(new KeyValuePair<string, string>("twig", "This Week in Google"));
-            masterChannelList.Add(new KeyValuePair<string, string>("twil", "This Week in Law"));
-            masterChannelList.Add(new KeyValuePair<string, string>("twit", "This Week in Tech"));
-            masterChannelList.Add(new KeyValuePair<string, string>("tri", "Triangulation"));
-            masterChannelList.Add(new KeyValuePair<string, string>("specials", "TWiT Live Specials"));
-            masterChannelList.Add(new KeyValuePair<string, string>("ww", "Windows Weekly"));
+            var masterChannelList = new List<KeyValuePair<string,string>>
+            {
+                new KeyValuePair<string, string>("aaa", "All About Android"),
+                new KeyValuePair<string, string>("arena", "Android App Arena"),
+                new KeyValuePair<string, string>("byb", "Before You Buy"),
+                new KeyValuePair<string, string>("code", "Coding 101"),
+                new KeyValuePair<string, string>("floss", "FLOSS Weekly"),
+                new KeyValuePair<string, string>("dgw", "The Giz Wiz"),
+                new KeyValuePair<string, string>("hn", "Ham Nation"),
+                new KeyValuePair<string, string>("htg", "Home Theater Geeks"),
+                new KeyValuePair<string, string>("ifive", "iFive For The iPhone"),
+                new KeyValuePair<string, string>("ipad", "iPad Today"),
+                new KeyValuePair<string, string>("kh", "Know How"),
+                new KeyValuePair<string, string>("mbw", "MacBreak Weekly"),
+                new KeyValuePair<string, string>("mm", "Marketing Mavericks"),
+                new KeyValuePair<string, string>("omgcraft", "OMGcraft"),
+                new KeyValuePair<string, string>("sn", "Security Now"),
+                new KeyValuePair<string, string>("natn", "The Social Hour"),
+                new KeyValuePair<string, string>("ttg", "The Tech Guy"),
+                new KeyValuePair<string, string>("tnt", "Tech News Today"),
+                new KeyValuePair<string, string>("tn2n", "Tech News 2Night"),
+                new KeyValuePair<string, string>("twich", "This Week in Computer Hardware"),
+                new KeyValuePair<string, string>("twiet", "This Week in Enterprise Tech"),
+                new KeyValuePair<string, string>("twig", "This Week in Google"),
+                new KeyValuePair<string, string>("twil", "This Week in Law"),
+                new KeyValuePair<string, string>("twit", "This Week in Tech"),
+                new KeyValuePair<string, string>("tri", "Triangulation"),
+                new KeyValuePair<string, string>("specials", "TWiT Live Specials"),
+                new KeyValuePair<string, string>("ww", "Windows Weekly")
+            };
 
-            Dictionary<string, string> altArtValues = new Dictionary<string, string>();
+            var altArtValues = new Dictionary<string, string>();
             altArtValues["natn"] = "tsh";
 
             int filterLimit;
@@ -152,13 +153,13 @@ namespace MediaBrowser.Plugins.TWiT
                 filterLimit = masterChannelList.Count - 1;
             }
 
-            Dictionary<string, string> filteredChannelList = new Dictionary<string, string>();
-            for (int i = (int)query.StartIndex; i <= filterLimit; i++)
+            var filteredChannelList = new Dictionary<string, string>();
+            for (var i = (int)query.StartIndex; i <= filterLimit; i++)
             {
                 filteredChannelList[masterChannelList[i].Key] = masterChannelList[i].Value;
             }
 
-            foreach (KeyValuePair<string, string> currentChannel in filteredChannelList)
+            foreach (var currentChannel in filteredChannelList)
             {
                 if (altArtValues.ContainsKey(currentChannel.Key))
                 {
@@ -195,28 +196,31 @@ namespace MediaBrowser.Plugins.TWiT
             var offset = query.StartIndex.GetValueOrDefault();
             var downloader = new TwitChannelItemsDownloader(_logger, _xmlSerializer, _httpClient);
 
-            string streamingWidth = Channel.ConfigurationManager.Configuration.ChannelOptions.PreferredStreamingWidth.ToString();
+            var streamingWidth = Channel.ConfigurationManager.Configuration.ChannelOptions.PreferredStreamingWidth.ToString();
 
-            string baseurl = "http://feeds.twit.tv/" + query.FolderId + "_video_hd.xml";
+            var baseurl = "http://feeds.twit.tv/" + query.FolderId + "_video_hd.xml";
 
             var videos = await downloader.GetStreamList(baseurl, offset, cancellationToken)
                 .ConfigureAwait(false);
 
             var itemslist = videos.channel.item;
 
-            List<ChannelItemInfo> items = new List<ChannelItemInfo>();
+            var items = new List<ChannelItemInfo>();
 
-            foreach (rssChannelItem i in itemslist)
+            foreach (var i in itemslist)
             {
-                List<ChannelMediaInfo> mediaInfo = new List<ChannelMediaInfo>();
-                mediaInfo.Add( new ChannelMediaInfo {
-                    IsRemote = true,
-                    Path = i.link,
-                    Width = 1280,
-                    Height = 720,
-                });
+                var mediaInfo = new List<ChannelMediaInfo>
+                {
+                    new ChannelMediaInfo
+                    {
+                        IsRemote = true,
+                        Path = i.link,
+                        Width = 1280,
+                        Height = 720,
+                    }
+                };
 
-                string[] runtimeArray = i.duration.Split(':');
+                var runtimeArray = i.duration.Split(':');
                 int hours;
                 int minutes;
                 int.TryParse(runtimeArray[0], out hours);
@@ -224,21 +228,22 @@ namespace MediaBrowser.Plugins.TWiT
                 long runtime = (hours * 60) + minutes;
                 runtime = TimeSpan.FromMinutes(runtime).Ticks;
 
-                items.Add( new ChannelItemInfo {
-                ContentType = ChannelMediaContentType.Podcast,
-                ImageUrl = "http://feeds.twit.tv/coverart/" + query.FolderId + "600.jpg",
-                IsInfiniteStream = true,
-                MediaType = ChannelMediaType.Video,
-                MediaSources = mediaInfo,
-                RunTimeTicks = runtime,
-                Name = i.title,
-                Id = i.link,
-                Type = ChannelItemType.Media,
-                DateCreated = !String.IsNullOrEmpty(i.pubDate) ?
-                    Convert.ToDateTime(i.pubDate) : (DateTime?)null,
-                PremiereDate = !String.IsNullOrEmpty(i.pubDate) ?
-                    Convert.ToDateTime(i.pubDate) : (DateTime?)null,
-                Overview = i.summary,
+                items.Add(new ChannelItemInfo 
+                {
+                    ContentType = ChannelMediaContentType.Podcast,
+                    ImageUrl = "http://feeds.twit.tv/coverart/" + query.FolderId + "600.jpg",
+                    IsInfiniteStream = true,
+                    MediaType = ChannelMediaType.Video,
+                    MediaSources = mediaInfo,
+                    RunTimeTicks = runtime,
+                    Name = i.title,
+                    Id = i.link,
+                    Type = ChannelItemType.Media,
+                    DateCreated = !String.IsNullOrEmpty(i.pubDate) ?
+                        Convert.ToDateTime(i.pubDate) : (DateTime?)null,
+                    PremiereDate = !String.IsNullOrEmpty(i.pubDate) ?
+                        Convert.ToDateTime(i.pubDate) : (DateTime?)null,
+                    Overview = i.summary,
                 });
             }
 
@@ -283,7 +288,7 @@ namespace MediaBrowser.Plugins.TWiT
         public async Task<IEnumerable<ChannelMediaInfo>> GetChannelItemMediaInfo(string id, CancellationToken cancellationToken)
         {
             string[] filenameparts = filenameparts = id.Split('_');
-            string baseurl = filenameparts[0];
+            var baseurl = filenameparts[0];
 
             _logger.Debug("**** TWiT PLAYBACK EPISODEID: " + baseurl + " ****");
             _logger.Debug("**** TWiT PLAYBACK HD Stream: " + baseurl + "_h264m_1280x720_1872.mp4" + " ****");
@@ -291,26 +296,26 @@ namespace MediaBrowser.Plugins.TWiT
             _logger.Debug("**** TWiT PLAYBACK LQ Stream: " + baseurl + "_h264b_640x368_256.mp4" + " ****");
 
             return new List<ChannelMediaInfo>
+            {
+                new ChannelMediaInfo
                 {
-                    new ChannelMediaInfo
-                    {
-                        Path = baseurl + "_h264m_1280x720_1872.mp4",
-                        Width = 1280,
-                        Height = 720,
-                    },
-                    new ChannelMediaInfo
-                    {
-                        Path = baseurl + "_h264m_864x480_500.mp4",
-                        Width = 864,
-                        Height = 480,
-                    },
-                    new ChannelMediaInfo
-                    {
-                        Path = baseurl + "_h264b_640x368_256.mp4",
-                        Width = 640,
-                        Height = 368,
-                    }
-                };
+                    Path = baseurl + "_h264m_1280x720_1872.mp4",
+                    Width = 1280,
+                    Height = 720,
+                },
+                new ChannelMediaInfo
+                {
+                    Path = baseurl + "_h264m_864x480_500.mp4",
+                    Width = 864,
+                    Height = 480,
+                },
+                new ChannelMediaInfo
+                {
+                    Path = baseurl + "_h264b_640x368_256.mp4",
+                    Width = 640,
+                    Height = 368,
+                }
+            };
         }
     }
 }
