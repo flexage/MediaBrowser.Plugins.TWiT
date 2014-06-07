@@ -35,6 +35,11 @@ namespace MediaBrowser.Plugins.TWiT
             get { return "4"; }
         }
 
+        public string Description
+        {
+            get { return "The TWiT.tv Netcast Network with Leo Laporte features the #1 ranked technology podcast This Week in Tech, along with over 20 other top-ranked online shows."; }
+        }
+
         public string HomePageUrl
         {
             get { return "http://twit.tv"; }
