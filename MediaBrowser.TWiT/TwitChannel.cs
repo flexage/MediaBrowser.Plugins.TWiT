@@ -28,22 +28,32 @@ namespace MediaBrowser.Plugins.TWiT
             _xmlSerializer = xmlSerializer;
         }
 
+
+        // IChannel Interface Implementation
         public string DataVersion
         {
             get { return "1.0"; }
         }
 
-        public Task<ChannelItemResult> GetAllMedia(InternalAllChannelMediaQuery query, CancellationToken cancellationToken)
+        public string HomePageUrl
         {
-            throw new NotImplementedException();
+            get { return "http://twit.tv"; }
+        }
+
+        public string Name
+        {
+            get { return "TWiT"; }
+        }
+
+        public ChannelParentalRating ParentalRating
+        {
+            get { return ChannelParentalRating.GeneralAudience;  }
         }
 
         public InternalChannelFeatures GetChannelFeatures()
         {
             return new InternalChannelFeatures
             {
-                CanSearch = false,
-
                 ContentTypes = new List<ChannelMediaContentType>
                 {
                     ChannelMediaContentType.Podcast
@@ -187,7 +197,6 @@ namespace MediaBrowser.Plugins.TWiT
             {
                 Items = twitChannels.ToList(),
                 TotalRecordCount = masterChannelList.Count,
-                CacheLength = TimeSpan.FromHours(0),
             };
         }
 
@@ -251,7 +260,6 @@ namespace MediaBrowser.Plugins.TWiT
             {
                 Items = items,
                 TotalRecordCount = items.Count,
-                CacheLength = TimeSpan.FromHours(0)
             };
         }
 
@@ -265,26 +273,12 @@ namespace MediaBrowser.Plugins.TWiT
             };
         }
 
-        public string HomePageUrl
-        {
-            get { return "http://twit.tv"; }
-        }
-
-        public bool IsEnabledFor(User user)
+        public bool IsEnabledFor(string userId)
         {
             return true;
         }
 
-        public string Name
-        {
-            get { return "TWiT"; }
-        }
-
-        public Task<IEnumerable<ChannelItemInfo>> Search(ChannelSearchInfo searchInfo, User user, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
+        //IRequiresMediaInfoCallback Interface Implementation
         public async Task<IEnumerable<ChannelMediaInfo>> GetChannelItemMediaInfo(string id, CancellationToken cancellationToken)
         {
             string[] filenameparts = filenameparts = id.Split('_');
