@@ -32,7 +32,7 @@ namespace MediaBrowser.Plugins.TWiT
         // IChannel Interface Implementation
         public string DataVersion
         {
-            get { return "1.0"; }
+            get { return "4"; }
         }
 
         public string HomePageUrl
@@ -101,7 +101,7 @@ namespace MediaBrowser.Plugins.TWiT
         {
             ChannelItemResult result = null;
 
-            //_logger.Debug("cat ID : " + query.FolderId);
+            _logger.Debug("cat ID : " + query.FolderId);
 
             if (query.FolderId == null)
             {
@@ -153,7 +153,7 @@ namespace MediaBrowser.Plugins.TWiT
             var altArtValues = new Dictionary<string, string>();
             altArtValues["natn"] = "tsh";
 
-            int filterLimit;
+            /*int filterLimit;
             if (query.StartIndex + query.Limit <= masterChannelList.Count)
             {
                 filterLimit = (int)(query.StartIndex + query.Limit) - 1;
@@ -164,12 +164,15 @@ namespace MediaBrowser.Plugins.TWiT
             }
 
             var filteredChannelList = new Dictionary<string, string>();
-            for (var i = (int)query.StartIndex; i <= filterLimit; i++)
+            if (query.StartIndex != null)
             {
-                filteredChannelList[masterChannelList[i].Key] = masterChannelList[i].Value;
-            }
+                for (var i = (int)query.StartIndex; i <= filterLimit; i++)
+                {
+                    filteredChannelList[masterChannelList[i].Key] = masterChannelList[i].Value;
+                }
+            }*/
 
-            foreach (var currentChannel in filteredChannelList)
+            foreach (var currentChannel in masterChannelList)
             {
                 if (altArtValues.ContainsKey(currentChannel.Key))
                 {
