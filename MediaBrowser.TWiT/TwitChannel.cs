@@ -6,6 +6,7 @@ using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Channels;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Logging;
+using MediaBrowser.Model.MediaInfo;
 using MediaBrowser.Model.Serialization;
 using System;
 using System.Collections.Generic;
@@ -230,7 +231,7 @@ namespace MediaBrowser.Plugins.TWiT
                 {
                     new ChannelMediaInfo
                     {
-                        IsRemote = true,
+                        Protocol = MediaProtocol.Http,
                         Path = i.link,
                         Width = 1280,
                         Height = 720,
