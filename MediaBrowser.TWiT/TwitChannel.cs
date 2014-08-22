@@ -22,7 +22,7 @@ namespace MediaBrowser.Plugins.TWiT
         private readonly ILogger _logger;
         private readonly IXmlSerializer _xmlSerializer;
 
-        public TwitChannel(IHttpClient httpClient, IXmlSerializer xmlSerializer, ILogManager logManager, IServerManager serverManager)
+        public TwitChannel(IHttpClient httpClient, IXmlSerializer xmlSerializer, ILogManager logManager)
         {
             _httpClient = httpClient;
             _logger = logManager.GetLogger(GetType().Name);
@@ -33,7 +33,7 @@ namespace MediaBrowser.Plugins.TWiT
         // IChannel Interface Implementation
         public string DataVersion
         {
-            get { return "4"; }
+            get { return "5"; }
         }
 
         public string Description
@@ -105,7 +105,7 @@ namespace MediaBrowser.Plugins.TWiT
 
         public async Task<ChannelItemResult> GetChannelItems(InternalChannelItemQuery query, CancellationToken cancellationToken)
         {
-            ChannelItemResult result = null;
+            ChannelItemResult result;
 
             _logger.Debug("cat ID : " + query.FolderId);
 
@@ -214,8 +214,6 @@ namespace MediaBrowser.Plugins.TWiT
             var offset = query.StartIndex.GetValueOrDefault();
             var downloader = new TwitChannelItemsDownloader(_logger, _xmlSerializer, _httpClient);
 
-            var streamingWidth = Channel.ConfigurationManager.Configuration.ChannelOptions.PreferredStreamingWidth.ToString();
-
             var baseurl = "http://feeds.twit.tv/" + query.FolderId + "_video_hd.xml";
 
             var videos = await downloader.GetStreamList(baseurl, offset, cancellationToken)
@@ -290,7 +288,7 @@ namespace MediaBrowser.Plugins.TWiT
         //IRequiresMediaInfoCallback Interface Implementation
         public async Task<IEnumerable<ChannelMediaInfo>> GetChannelItemMediaInfo(string id, CancellationToken cancellationToken)
         {
-            string[] filenameparts = filenameparts = id.Split('_');
+            var filenameparts = id.Split('_');
             var baseurl = filenameparts[0];
 
             _logger.Debug("**** TWiT PLAYBACK EPISODEID: " + baseurl + " ****");
